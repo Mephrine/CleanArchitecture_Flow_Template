@@ -1,2 +1,5 @@
 rootProject.name = "Base"
-include ':app'
+include ':Presentation'
+include ':Data'
+include ':Domain'
+include ':Utility'

@@ -1,0 +1,30 @@
+android {
+    buildTypes {
+        def config = { k -> "\"${project.properties.get(k)}\"" }
+
+        debug {
+            buildConfigField 'String', 'SOCKET_URL', config("socket.url")
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField 'String', 'SOCKET_URL', config("production.socket.url")
+        }
+    }
+}
+
+dependencies {
+    implementation project(':Domain')
+    implementation project(':Utility')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core"
+
+    // Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+}

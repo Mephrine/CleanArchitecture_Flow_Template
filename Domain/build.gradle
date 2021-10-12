@@ -1,0 +1,27 @@
+android {
+    buildTypes {
+        def config = { k -> "\"${project.properties.get(k)}\"" }
+
+        debug {
+            buildConfigField 'String', 'API_URL', config("api.url")
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField 'String', 'API_URL', config("production.api.url")
+        }
+    }
+}
+
+dependencies {
+    implementation project(':Utility')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core"
+    implementation "com.google.code.gson:gson:$gson"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_logging"
+}

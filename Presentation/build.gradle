@@ -1,0 +1,157 @@
+android {
+//    File signFile = rootProject.file('keystore.properties')
+//    if (signFile.exists()) {
+//        Properties properties = new Properties()
+//        properties.load(new FileInputStream(signFile))
+//        signingConfigs {
+//            releaseSign {
+//                storeFile rootProject.file(properties['storeFile'])
+//                storePassword properties['storePassword']
+//                keyAlias properties['keyAlias']
+//                keyPassword properties['keyPassword']
+//            }
+//        }
+//    }
+
+    defaultConfig {
+        applicationId "mephrine.template"
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            ndk.abiFilters 'arm64-v8a'
+        }
+    }
+
+    flavorDimensions "api"
+    productFlavors {
+        def config = { k -> "\"${project.properties.get(k)}\"" }
+
+        dev {
+            dimension "api"
+//            applicationIdSuffix ".dev"
+            buildConfigField 'String', 'API_URL', config("api.url")
+            manifestPlaceholders = [appName : "Template_dev"]
+            resValue "string", "appName", "Template_dev"
+        }
+
+        prod {
+            dimension "api"
+            buildConfigField 'String', 'API_URL', config("production.api.url")
+            manifestPlaceholders = [appName : "Template"]
+            resValue "string", "appName", "Template_dev"
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
+    packagingOptions {
+        exclude 'AndroidManifest.xml'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude "META-INF/LICENSE*"
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'build.xml'
+
+        doNotStrip '*/armeabi-v7a/*.so'
+        doNotStrip '*/arm64-v8a/*.so'
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    implementation project(':Domain')
+    implementation project(':Data')
+    implementation project(':Utility')
+
+    kapt "androidx.annotation:annotation:$annotation"
+    implementation "androidx.multidex:multidex:$multidex"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$kotlin_extension"
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+
+    // Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$kotlin_lifecycle_extesnion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extension"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_reactivestreams"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$kotlin_lifecycle_extesnion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$kotlin_lifecycle_extesnion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$kotlin_lifecycle_extesnion"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // activity, fragment
+    implementation "androidx.activity:activity-ktx:$kotlin_activity_extension"
+    implementation "androidx.fragment:fragment-ktx:$kotlin_fragment_extension"
+
+    // EventBus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+
+    // Dependency Injection
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    // Permissions
+    implementation 'gun0912.ted:tedpermission:2.2.2'
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide"
+    implementation "jp.wasabeef:glide-transformations:$glide_transformations"
+    kapt "com.github.bumptech.glide:compiler:$glide"
+    implementation ("com.github.bumptech.glide:okhttp3-integration:$glide") {
+        exclude group: 'glide-parent'
+    }
+
+    // Retrofit2
+    implementation "com.google.code.gson:gson:$gson"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_logging"
+
+    // UI
+    implementation "androidx.recyclerview:recyclerview:$recyclerview"
+
+    // ExoPlayer
+    implementation "com.google.android.exoplayer:exoplayer-core:$exo_player"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exo_player"
+    implementation "com.google.android.exoplayer:exoplayer-hls:$exo_player"
+
+    // lottie
+    implementation "com.airbnb.android:lottie:$lottie"
+    // UI Test
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

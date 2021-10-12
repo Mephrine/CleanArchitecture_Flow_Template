@@ -1,0 +1,12 @@
+android {
+    buildTypes {
+        def config = { k -> "\"${project.properties.get(k)}\"" }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
