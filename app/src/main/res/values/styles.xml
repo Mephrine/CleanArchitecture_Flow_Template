@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/black_0d0e17</item>
+        <item name="colorPrimaryDark">@color/black_0d0e17</item>
+        <item name="colorAccent">@color/black_0d0e17</item>
+
+        <item name="android:statusBarColor">@color/black_0d0e17</item>
+        <item name="android:windowBackground">@color/black_0d0e17</item>
+    </style>
+
+    <style name="CustomIndicator">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="LoginEditText">
+        <item name="colorControlNormal">@color/black_1d2433</item>
+        <item name="colorControlActivated">@color/white_ffffff</item>
+        <item name="colorAccent">@color/white_ffffff</item>
+        <item name="android:textColor">@color/white_ffffff</item>
+        <item name="android:textColorHint">@color/white_ffffff</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingHorizontal">0dp</item>
+        <item name="android:paddingBottom">19dp</item>
+    </style>
+
+    <style name="MaterialButtonDefaultStyle" >
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="MaterialButtonBlue" parent="MaterialButtonDefaultStyle">
+        <item name="backgroundTint">@color/blue_0089ff</item>
+        <item name="android:textColor">@color/white_ffffff</item>
+    </style>
+
+<!--    Animation     -->
+    <style name="PopupTransitionAnimationEnter">
+        <item name="android:windowEnterAnimation">@anim/bottom_up</item>
+    </style>
+
+    <style name="PopupTransitionAnimationExit">
+        <item name="android:windowExitAnimation">@anim/top_down</item>
+    </style>
+
+    <style name="FadeInTransitionAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+    </style>
+
+    <style name="FadeOutTransitionAnimation">
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+
+    <style name="DialogTheme">
+    </style>
+
+</resources>
